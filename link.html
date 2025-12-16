@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GATEWAY | Ultimate Links</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #ff0055;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --bg: #0f172a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 10s infinite ease-in-out;
+        }
+        .orb-1 { width: 300px; height: 300px; background: var(--primary); top: 10%; left: 20%; opacity: 0.2; }
+        .orb-2 { width: 400px; height: 400px; background: var(--accent); bottom: 10%; right: 10%; opacity: 0.15; animation-delay: -5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -50px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+
+        input#searchInput {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input#searchInput:focus {
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            border-color: var(--primary);
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            border-color: transparent;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Card Style */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+            group;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .card-url {
+            font-size: 0.8rem;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: auto;
+        }
+
+        .card-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover .card-icon {
+            color: var(--primary);
+            transform: rotate(-15deg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <header>
+            <h1>NEXUS GATEWAY</h1>
+            <p class="subtitle">Pusat Komando Digital Terintegrasi</p>
+        </header>
+
+        <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Cari tools, blog, atau dokumen...">
+        </div>
+
+        <div class="filters" id="filterContainer">
+            <button class="filter-btn active" data-filter="all">All</button>
+            </div>
+
+        <div class="grid" id="linkGrid">
+            </div>
+
+        <footer>
+            <p>Generated by Gemini AI • Data Source: User Data</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data derived from Source 1 & Source 2
+        const rawData = [
+            { cat: "Blog", name: "Esan", url: "https://esan.home.blog" },
+            { cat: "Sosmed", name: "Facebook", url: "https://fb.com" },
+            { cat: "Sosmed", name: "X (Twitter)", url: "https://x.com" },
+            { cat: "Email", name: "Gmail", url: "https://mail.google.com/" },
+            { cat: "AI Tools", name: "Gemini", url: "https://gemini.google.com/" },
+            { cat: "Tools System", name: "Github", url: "https://github.com/" },
+            { cat: "Email", name: "Outlook", url: "https://outlook.live.com/" },
+            { cat: "Tools System", name: "Raindrop", url: "https://app.raindrop.io/" },
+            { cat: "Email", name: "PythonAnywhere", url: "https://www.pythonanywhere.com/" },
+            { cat: "Email", name: "Yahoo", url: "https://login.yahoo.com/" },
+            { cat: "Cloud", name: "Google Drive", url: "https://drive.google.com/drive/" },
+            { cat: "Cloud", name: "One Drive", url: "https://www.microsoft.com/en/microsoft-365/onedrive/online-cloud-storage" },
+            { cat: "Hiburan", name: "YouTube", url: "https://youtube.com/" },
+            { cat: "Hiburan", name: "YouTube Music", url: "https://music.youtube.com/" },
+            { cat: "Blog", name: "Berpikir & Bertindak", url: "https://ebandaro.id/" },
+            { cat: "AI Tools", name: "Grok", url: "https://grok.com" },
+            { cat: "AI Tools", name: "Deepseek", url: "https://chat.deepseek.com/" },
+            { cat: "Tools System", name: "Login NVZE", url: "https://nvze.pythonanywhere.com/" },
+            { cat: "Office & Doc", name: "Google Sheets", url: "https://workspace.google.com/intl/en_id/products/sheets/" },
+            { cat: "Office & Doc", name: "Google Docs", url: "https://workspace.google.com/intl/en_id/products/docs/" },
+            { cat: "Office & Doc", name: "Simplenote", url: "https://app.simplenote.com/" },
+            { cat: "Office & Doc", name: "Google Keep", url: "https://keep.google.com" },
+            { cat: "Office & Doc", name: "Excel Online", url: "https://excel.cloud.microsoft/" },
+            { cat: "Office & Doc", name: "Notion", url: "https://www.notion.so" },
+            { cat: "Tools System", name: "Replit", url: "https://replit.com/" },
+            { cat: "Tools System", name: "Fast.com", url: "https://fast.com/" },
+            { cat: "Tools System", name: "Speed Test", url: "https://www.speedtest.net/" },
+            { cat: "Email", name: "Posting Tayang", url: "https://nvze.github.io/dashboard/pt-posting-tayang.html" },
+            { cat: "Email", name: "Protonmail", url: "https://proton.me/mail" },
+            { cat: "Sosmed", name: "WhatsApp Web", url: "https://web.whatsapp.com/" },
+            { cat: "Sosmed", name: "Telegram", url: "https://web.telegram.org/" },
+            { cat: "Sosmed", name: "CCTV Bandung", url: "https://arimbi.bandung.go.id/atcs" },
+            { cat: "Cloud", name: "TeraBox", url: "https://dm.terabox.com/ai/index" },
+            { cat: "Cloud", name: "Box", url: "https://www.box.com/" },
+            { cat: "Cloud", name: "Mega", url: "https://mega.nz/login" },
+            { cat: "Cloud", name: "Proton Drive", url: "https://drive.proton.me/" },
+            { cat: "Cloud", name: "Yandex Disk", url: "https://disk.yandex.com/" },
+            { cat: "Cloud", name: "Dropbox", url: "https://www.dropbox.com/" },
+            { cat: "Cloud", name: "MediaFire", url: "https://www.mediafire.com/" },
+            { cat: "Cloud", name: "Odoo", url: "https://www.odoo.com/" },
+            { cat: "AI Tools", name: "ChatGPT", url: "https://chatgpt.com/" },
+            { cat: "Cloud", name: "NotebookLM", url: "https://notebooklm.google/" },
+            { cat: "AI Tools", name: "Mistral", url: "https://chat.mistral.ai/chat" },
+            { cat: "AI Tools", name: "Perplexity", url: "https://www.perplexity.ai/" },
+            { cat: "AI Tools", name: "Copilot", url: "https://copilot.microsoft.com/" },
+            { cat: "AI Tools", name: "Meta AI", url: "https://www.meta.ai/" },
+            { cat: "AI Tools", name: "Qwen", url: "https://chat.qwen.ai/" },
+            { cat: "Tools System", name: "IDX Google", url: "https://idx.google.com/" },
+            { cat: "Hiburan", name: "KLCBS Radio", url: "https://streaming.klcbsofficial.com/public/klcbs" },
+            { cat: "Hiburan", name: "Maxstream", url: "https://maxstream.tv/home" },
+            { cat: "Hiburan", name: "Vidio", url: "https://vidio.com" },
+            { cat: "Hiburan", name: "Vision+", url: "https://www.visionplus.id/" },
+            { cat: "Hiburan", name: "RCTI+", url: "https://rctiplus.com" },
+            { cat: "Hiburan", name: "Trans TV", url: "https://www.transtv.co.id/live" },
+            { cat: "Blog", name: "Welib Perpus", url: "https://id.welib.org/" },
+            { cat: "Blog", name: "Kalam Sastra", url: "https://kalamsastra.id/" },
+            { cat: "Blog", name: "Sedet Cinta", url: "https://30hariceritacinta.blogspot.com/?m=0" },
+            { cat: "Blog", name: "About Business", url: "https://erizeli.aboutbusiness.info/" },
+            { cat: "Blog", name: "Cerpen Kehidupan", url: "https://cintokasiah.blogspot.com/" },
+            { cat: "Blog", name: "IMNXX", url: "https://imnxx.home.blog/" },
+            { cat: "Blog", name: "IMNVXX", url: "https://imvnxx.blogspot.com/" },
+            { cat: "Tools System", name: "Virus Total", url: "https://www.virustotal.com/gui/home/upload" },
+            { cat: "Tools System", name: "Netlify", url: "https://app.netlify.com/" },
+            { cat: "Tools System", name: "NextDNS", url: "https://my.nextdns.io/login" },
+            { cat: "Tools System", name: "VS Code Web", url: "https://vscode.dev/" },
+            { cat: "Tools System", name: "GetIntoPC", url: "https://getintopc.com/" },
+            { cat: "Sosmed", name: "NVZE Bookmark", url: "https://nvze.github.io/dashboard/bookmark.html" },
+            { cat: "Finance", name: "MT4 Octa", url: "https://mt4.octabroker.com/" },
+            { cat: "Finance", name: "Kurs Rupiah", url: "https://www.bloomberg.com/quote/USDIDR:CUR?embedded-checkout=true" },
+            { cat: "Finance", name: "DXY Chart", url: "https://www.tradingview.com/chart/?symbol=TVC%3ADXY" },
+            { cat: "Finance", name: "Investing ID", url: "https://id.investing.com/" },
+            { cat: "Finance", name: "Trading Economics", url: "https://tradingeconomics.com/" },
+            { cat: "Finance", name: "Paypal", url: "https://www.paypal.com/id/home" },
+            { cat: "Finance", name: "DJP Online", url: "https://djponline.pajak.go.id/account/login" },
+            { cat: "Finance", name: "Coretax DJP", url: "https://coretaxdjp.pajak.go.id/" },
+            { cat: "Finance", name: "Numbeo", url: "https://www.numbeo.com/cost-of-living/" },
+            { cat: "Finance", name: "Kledo", url: "https://app.kledo.com/#/user/login" },
+            { cat: "Hiburan", name: "Live TV Trans", url: "https://www.transtv.co.id/live-streaming-tv" },
+            { cat: "Hiburan", name: "Indihome TV", url: "https://www.indihometv.com/tv/live" },
+            { cat: "Blog", name: "As Laksana", url: "https://aslaksana.com/" },
+            { cat: "Blog", name: "Iman 20", url: "https://iman20.wordpress.com/" },
+            { cat: "Ulinan", name: "Face Swap Pixnova", url: "https://pixnova.ai/multiple-face-swap/#playground" },
+            { cat: "Ulinan", name: "Image Upscaler", url: "https://imgupscaler.ai/" },
+            { cat: "Ulinan", name: "Face Swapper", url: "https://www.faceswapper.ai/multiple-face-swap" },
+            { cat: "Ulinan", name: "Pixelcut Upscaler", url: "https://www.pixelcut.ai/id/t/upscaler" },
+            { cat: "Ulinan", name: "Resize Foto Pi7", url: "https://image.pi7.org/id/memperbesar-ukuran-foto" },
+            { cat: "Tools System", name: "Adguard DNS", url: "https://adguard-dns.io/kb/general/dns-providers/" },
+            { cat: "Tools System", name: "RapidTables Notepad", url: "https://www.rapidtables.com/tools/notepad.html#" },
+            { cat: "Tools System", name: "Online Tools", url: "https://www.rapidtables.com/tools/index.html" },
+            { cat: "Tools System", name: "Sourceforge", url: "https://sourceforge.net/" },
+            { cat: "Tools System", name: "Diagrams.net", url: "https://app.diagrams.net/" },
+            { cat: "Tools System", name: "Mondokan Link", url: "https://dash.s.id/dashboard" },
+            { cat: "Ulinan", name: "Hapus Background", url: "https://www.remove.bg/id" },
+            { cat: "Ulinan", name: "BigJPG", url: "https://bigjpg.com/" }
+        ];
+
+        // Icon Mapping
+        const getIcon = (cat) => {
+            const map = {
+                'Blog': 'fa-book-open',
+                'Sosmed': 'fa-share-nodes',
+                'Email': 'fa-envelope',
+                'AI Tools': 'fa-brain',
+                'Tools System': 'fa-screwdriver-wrench',
+                'Cloud': 'fa-cloud',
+                'Hiburan': 'fa-play-circle',
+                'Office & Doc': 'fa-file-lines',
+                'Finance': 'fa-chart-line',
+                'Ulinan': 'fa-wand-magic-sparkles'
+            };
+            return map[cat] || 'fa-link';
+        };
+
+        const grid = document.getElementById('linkGrid');
+        const filterContainer = document.getElementById('filterContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        // Extract unique categories
+        const categories = ['all', ...new Set(rawData.map(item => item.cat))];
+
+        // Initialize Categories
+        categories.forEach(cat => {
+            if(cat !== 'all') {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = cat;
+                btn.dataset.filter = cat;
+                btn.onclick = () => filterLinks(cat, btn);
+                filterContainer.appendChild(btn);
+            }
+        });
+
+        // Initialize Cards
+        function renderCards(data) {
+            grid.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.url;
+                card.target = "_blank";
+                card.className = 'card';
+                card.innerHTML = `
+                    <div>
+                        <div class="card-category">
+                            <i class="fas ${getIcon(item.cat)}"></i> ${item.cat}
+                        </div>
+                        <div class="card-title">${item.name}</div>
+                    </div>
+                    <div class="card-url">${item.url.replace('https://', '')}</div>
+                    <i class="fas fa-external-link-alt card-icon"></i>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Function
+        function filterLinks(category, btnElement) {
+            // Active button state
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                document.querySelector('[data-filter="all"]').classList.add('active');
+            }
+
+            // Filter logic
+            if (category === 'all') {
+                renderCards(rawData);
+            } else {
+                const filtered = rawData.filter(item => item.cat === category);
+                renderCards(filtered);
+            }
+        }
+
+        // Search Function
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const searched = rawData.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.cat.toLowerCase().includes(term) || 
+                item.url.toLowerCase().includes(term)
+            );
+            renderCards(searched);
+            
+            // Reset active filter visual
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        });
+
+        // Initial Render
+        renderCards(rawData);
+        
+        // Add click listener for 'All' button
+        document.querySelector('[data-filter="all"]').onclick = function() {
+            filterLinks('all', this);
+        };
+
+    </script>
+</body>
+</html>
